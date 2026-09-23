@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { useQuote } from "@/contexts/QuoteContext";
+import { useQuote, QuoteProvider } from "@/contexts/QuoteContext";
 import {
   FileText, Users, Printer, Calculator, History, FileCheck
 } from "lucide-react";
@@ -24,7 +24,11 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: QuoteApp,
+  component: () => (
+    <QuoteProvider>
+      <QuoteApp />
+    </QuoteProvider>
+  ),
 });
 
 type Tab = "editor" | "clients" | "preview" | "history" | "contract" | "calculator";
