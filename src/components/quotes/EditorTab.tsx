@@ -273,18 +273,31 @@ export function EditorTab({ onSaveClient, onChangeTab }: { onSaveClient: () => v
         </button>
 
         {mediaFiles.length > 0 && (
-          <div className="mt-4 grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {mediaFiles.map((media) => (
-              <div key={media.id} className="group relative overflow-hidden rounded-lg border border-border bg-secondary/40">
-                {media.type === "image" ? (
-                  <img src={media.url} alt={media.name} className="h-32 w-full object-cover" />
-                ) : (
-                  <video src={media.url} controls className="h-32 w-full bg-black object-cover" />
-                )}
-                <p className="truncate px-2 py-1 text-xs text-muted-foreground">{media.name}</p>
-                <button onClick={() => setMediaFiles(mediaFiles.filter((m) => m.id !== media.id))} className="absolute top-2 right-2 rounded-full bg-destructive p-2 text-destructive-foreground opacity-0 transition-opacity group-hover:opacity-100" title="Remover">
-                  <Trash2 className="h-3.5 w-3.5" />
-                </button>
+              <div key={media.id} className="group relative overflow-hidden rounded-lg border border-border bg-secondary/40 flex flex-col">
+                <div className="relative">
+                  {media.type === "image" ? (
+                    <img src={media.url} alt={media.name} className="h-48 w-full object-cover" />
+                  ) : (
+                    <video src={media.url} controls className="h-48 w-full bg-black object-cover" />
+                  )}
+                  <button onClick={() => setMediaFiles(mediaFiles.filter((m) => m.id !== media.id))} className="absolute top-2 right-2 rounded-full bg-destructive p-2 text-destructive-foreground opacity-0 transition-opacity group-hover:opacity-100 shadow-md" title="Remover">
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+                <div className="p-3 border-t border-border flex flex-col gap-2 flex-grow">
+                  <p className="truncate text-xs text-muted-foreground" title={media.name}>{media.name}</p>
+                  <input 
+                    type="text" 
+                    placeholder="Observações / Condições" 
+                    className="field text-sm" 
+                    value={media.notes || ""}
+                    onChange={(e) => {
+                      setMediaFiles(mediaFiles.map(m => m.id === media.id ? { ...m, notes: e.target.value } : m));
+                    }}
+                  />
+                </div>
               </div>
             ))}
           </div>

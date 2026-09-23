@@ -147,17 +147,22 @@ export function PreviewTab() {
           <div className="mt-8 html2pdf__page-break">
             <h3 className="mb-3 text-sm font-bold tracking-wide uppercase">Anexos / referências do projeto</h3>
             <div className="grid grid-cols-2 gap-3">
-              {mediaFiles.map((media) =>
-                media.type === "image" ? (
-                  <img key={media.id} src={media.url} alt={media.name} className="w-full rounded-md border border-border object-cover" />
-                ) : (
-                  <div key={media.id} className="flex flex-col items-center justify-center gap-1 rounded-md border border-border p-6 text-center text-xs">
-                    <FileVideo className="h-8 w-8 text-accent" />
-                    <p>Vídeo anexado ao projeto</p>
-                    <p className="text-muted-foreground">{media.name}</p>
-                  </div>
-                )
-              )}
+              {mediaFiles.map((media) => (
+                <div key={media.id} className="flex flex-col gap-1 rounded-md border border-border p-2">
+                  {media.type === "image" ? (
+                    <img src={media.url} alt={media.name} className="w-full rounded-sm object-cover" />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center gap-1 bg-secondary/20 p-6 text-center text-xs">
+                      <FileVideo className="h-8 w-8 text-accent" />
+                      <p>Vídeo anexado ao projeto</p>
+                      <p className="text-muted-foreground">{media.name}</p>
+                    </div>
+                  )}
+                  {media.notes && (
+                    <p className="mt-1 text-xs italic text-muted-foreground whitespace-pre-wrap">{media.notes}</p>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         )}

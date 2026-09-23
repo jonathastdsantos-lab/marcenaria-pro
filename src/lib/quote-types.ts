@@ -19,6 +19,7 @@ export type MediaFile = {
   url: string;
   type: "image" | "video";
   name: string;
+  notes?: string;
 };
 
 export const formatCurrency = (value: number) =>
