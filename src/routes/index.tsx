@@ -94,7 +94,7 @@ function QuoteApp() {
         {activeTab === "editor" && (
           <EditorTab 
             onSaveClient={handleSaveClient} 
-            onChangeTab={setActiveTab} 
+            onChangeTab={(t) => setActiveTab(t as Tab)} 
           />
         )}
 
