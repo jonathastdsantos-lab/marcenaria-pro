@@ -23,7 +23,7 @@ export function ContractTab() {
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
     
-    html2pdf().set(opt).from(element).save();
+    html2pdf().set(opt as any).from(element).save();
   };
 
   return (

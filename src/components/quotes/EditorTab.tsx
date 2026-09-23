@@ -32,7 +32,7 @@ export function EditorTab({ onSaveClient, onChangeTab }: { onSaveClient: () => v
     const newMedia = files.map((file) => ({
       id: `${Date.now()}-${Math.random()}`,
       url: URL.createObjectURL(file),
-      type: file.type.startsWith("video/") ? "video" : ("image" as const),
+      type: (file.type.startsWith("video/") ? "video" : "image") as "video" | "image",
       name: file.name,
     }));
     setMediaFiles([...mediaFiles, ...newMedia]);
