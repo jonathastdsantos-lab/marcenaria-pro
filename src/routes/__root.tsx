@@ -125,13 +125,17 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { QuoteProvider } from "../contexts/QuoteContext";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <QuoteProvider>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </QuoteProvider>
     </QueryClientProvider>
   );
 }
